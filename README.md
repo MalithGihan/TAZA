@@ -42,7 +42,7 @@ Once the project is deployed, paste the live link below:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/SE1020-IT2070-OOP-DSA-25/af-2-IT22352330.git
+   git clone https://github.com/MalithGihan/TAZA.git
 
    ```
 
