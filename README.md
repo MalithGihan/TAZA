@@ -10,9 +10,7 @@ This is a web application that allows users to explore countries. The applicatio
 
 ## 🔗 Live App
 
-Once the project is deployed, paste the live link below:
-
-`"https://your-live-site.vercel.app"`
+[Visit from here - https://tazalive.vercel.app/](https://tazalive.vercel.app/)
 
 ---
 
@@ -43,22 +41,65 @@ Once the project is deployed, paste the live link below:
 
    ```bash
    git clone https://github.com/SE1020-IT2070-OOP-DSA-25/af-2-IT22352330.git
-
    ```
+3. Go to your file directory for backend and frontend separately ->  (eg. cd .\project-IT22352330\backend and cd .\project-IT22352330\frontend )
 
 2. Install dependencies
+   
+   ```bash
+    npm install
+   ```
+   
+3. Add your Mongo Database url for .env file in backend
 
-- npm install
+4. Run the frontend app
+   
+   ```bash
+    npm dev build 
+    npm run start
+   ```
 
-3. Run the app
-
-- npm start
-
+5. Run the backend
+   
+    ```bash
+    npm run dev
+   ```
 ---
 
 ## 🧪 Running Tests
 
-To run unit tests - npm run test
+To run unit tests 
+
+ ```bash
+  npm run test
+ ```
+---
+
+## 🎯 Chosen APIs for build the frontend data management
+
+1.  https://restcountries.com/v3.1/all - Fetch all countries and its information
+
+2.  https://restcountries.com/v3.1/name/{name} -Fetch specific country using the name like using the search function
+
+3.  https://restcountries.com/v3.1/lang/{language} - Fetch filter countries by Language
+
+4.  https://restcountries.com/v3.1/region/{region} - Fetch filter countries by Region
+
+Note: RTK Query was utilized for data fetching and caching, please refer the file "src/app/quaries/useAllCountries.js" found in the frontend api folder for further reference
+
+---
+
+### Challenges Faced and Resolution
+
+- Hard to find time for build the website and achive other requirements.
+- Due to heavy usage of the REST Countries API, the server has kept crashing serveral times thoughout the project.
+- Used a another hosting server to deploy the backend services 
+
+---
+
+## 🔑 Authentication
+
+This API uses **JWT (JSON Web Tokens)** for authentication and authorization.
 
 ---
 
@@ -68,4 +109,11 @@ This project is licensed under the MIT License.
 
 ---
 
-Just replace `"Malith Gihan"` and `"https://your-live-site.vercel.app"` with your actual name and live site URL once it's published.
+### Contact me
+ 
+For any inquiries, feel free to reach out via:
+
+Email: malithgihan099@gmail.com\
+Contributors: @IT22352330\
+Number: 0703387938\
+
