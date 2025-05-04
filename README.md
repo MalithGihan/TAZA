@@ -10,9 +10,7 @@ This is a web application that allows users to explore countries. The applicatio
 
 ## 🔗 Live App
 
-Once the project is deployed, paste the live link below:
-
-`"https://your-live-site.vercel.app"`
+[Visit from here](https://taza-mu.vercel.app/)
 
 ---
 
