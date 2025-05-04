@@ -103,7 +103,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <div className="font-serif max-w-6xl mx-auto pt-36 font-sans ">
+    <div className="font-serif max-w-6xl mx-auto pt-36 font-sans md:px-10 px-4">
       <section
         className={`text-center mb-20 transform transition-all duration-1000 ease-out ${
           isVisible.hero

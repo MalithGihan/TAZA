@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite preview",
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
+    "lint": "eslint .",
     "test": "jest --config=jest.config.cjs"
   },
   "dependencies": {

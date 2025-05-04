@@ -55,7 +55,7 @@ export default function CountriesByLanguage() {
   };
 
   return (
-    <div className="font-serif min-h-screen pt-36 pb-16 justify-center items-center max-w-7xl mx-auto">
+    <div className="font-serif min-h-screen pt-36 pb-16 justify-center items-center max-w-7xl mx-auto md:px-10 px-6">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-3 text-primary">
           Explore Countries by Language
@@ -191,7 +191,7 @@ export default function CountriesByLanguage() {
               ✓ Found {countries.length} countries for {language}
             </span>
             {countries.length > itemsPerPage && (
-              <div className="flex items-center gap-3 text-sm">
+              <div className="flex items-center gap-3 text-sm md:flex-row flex-col">
                 <span className="text-gray-500">
                   Page {currentPage} of {totalPages}
                 </span>

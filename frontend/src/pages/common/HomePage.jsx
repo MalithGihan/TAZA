@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { Reload } from "../../components/Reload/Reload";
+import Reload from "../../components/reload/Reload";
 import { motion } from "framer-motion";
 
 export const HomePage = () => {
@@ -247,7 +247,7 @@ export const HomePage = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute left-12 top-36 transform -translate-y-1/4"
+        className="absolute lg:left-12 md:left-8 left-4 top-36 transform -translate-y-1/4 px-4"
       >
         <div className="flex flex-col mb-2">
           <h1 className="font-lora text-[80px] text-white font-bold">
@@ -282,7 +282,7 @@ export const HomePage = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute right-12 bottom-2/4 transform -translate-y-1/2 my-8"
+        className="absolute lg:right-12 md:right-8 right-4 lg:bottom-2/4 transform -translate-y-1/2 my-8 bottom-1/4 px-4"
       >
         <div className="flex flex-col mb-4 text-right">
           <h1 className="text-2xl text-white font-bold mb-4">
@@ -306,7 +306,7 @@ export const HomePage = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute right-12 bottom-5 transform -translate-y-1/2 my-8"
+        className="absolute lg:right-12 md:right-8 right-4 lg:bottom-5 lg:my-10 transform -translate-y-1/2 my-15 bottom-1 px-4"
       >
         <div className="flex flex-col mb-4 text-right">
           <h1 className="text-2xl text-white font-bold mb-4">

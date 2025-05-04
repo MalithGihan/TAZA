@@ -111,11 +111,14 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async ({ email, password }) => {
-      const res = await fetch(`http://localhost:3000/api/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        `https://taza-backend-production.up.railway.app/api/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (!res.ok) throw new Error("Login failed");
 
@@ -131,14 +134,18 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async ({ name, email, phone, password }) => {
-      const res = await fetch(`http://localhost:3000/api/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, password }),
-      });
+      const res = await fetch(
+        `https://taza-backend-production.up.railway.app/api/register`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone, password }),
+        }
+      );
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -150,6 +157,7 @@ export const useRegister = () => {
     onSuccess: (data) => {
       localStorage.setItem("token", data.token);
       dispatch(loginSuccess({ user: data.user, token: data.token }));
+      navigate("/");
     },
   });
 };

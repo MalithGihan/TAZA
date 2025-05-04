@@ -8,6 +8,7 @@ import {
   X,
   LogIn,
   LogOut,
+  Tv,
 } from "lucide-react";
 import { navLinks } from "./Heder.config";
 import ThemeToggle from "./ThemeToggle";
@@ -169,13 +170,24 @@ const Header = () => {
 
           <div className="flex items-center space-x-3 md:hidden">
             <ThemeToggle />
-            <Link
-              to="/login"
-              className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
-            >
-              <LogIn size={18} />
-              Login
-            </Link>
+            {!isAuthenticated ? (
+              <Link
+                to="/login"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                <LogIn size={18} />
+                Login
+              </Link>
+            ) : (
+              <button
+                to="/logout"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                onClick={logout}
+              >
+                <LogIn size={18} />
+                Logout
+              </button>
+            )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-md hover:bg-light_hover dark:hover:bg-dark_hover transition-colors"
@@ -235,25 +247,34 @@ const Header = () => {
               )}
             </div>
           ))}
+          {isAuthenticated && (
+            <div className="pt-4 border-t border-gray-200 dark:border-dark_hover">
+              <Link
+                className="flex items-center px-3 py-2 rounded-md font-medium hover:bg-light_hover dark:hover:bg-dark_hover"
+                to="/live"
+              >
+                <Tv size={18} className="mr-2" />
+                Live
+              </Link>
 
-          <div className="pt-4 border-t border-gray-200 dark:border-dark_hover">
-            <Link
-              to="/account"
-              className="flex items-center px-3 py-2 rounded-md font-medium hover:bg-light_hover dark:hover:bg-dark_hover"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <User size={18} className="mr-2" />
-              My Account
-            </Link>
-            <Link
-              to="/search"
-              className="flex items-center px-3 py-2 rounded-md font-medium hover:bg-light_hover dark:hover:bg-dark_hover"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <Search size={18} className="mr-2" />
-              Search
-            </Link>
-          </div>
+              <Link
+                to="/account"
+                className="flex items-center px-3 py-2 rounded-md font-medium hover:bg-light_hover dark:hover:bg-dark_hover"
+                onClick={() => setShowUserData(!showUserData)}
+              >
+                <User size={18} className="mr-2" />
+                My Account
+              </Link>
+              <Link
+                to="/search"
+                className="flex items-center px-3 py-2 rounded-md font-medium hover:bg-light_hover dark:hover:bg-dark_hover"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Search size={18} className="mr-2" />
+                Search
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 

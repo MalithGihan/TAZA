@@ -1,6 +1,7 @@
 import React from "react";
+import { CircleX } from "lucide-react";
 
-export const Reload = () => {
+const Reload = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-red-50 p-4">
       <CircleX size={24} />
@@ -15,3 +16,5 @@ export const Reload = () => {
     </div>
   );
 };
+
+export default Reload;

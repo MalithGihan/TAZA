@@ -2,10 +2,11 @@
 import { useState, useRef, useMemo } from "react";
 import { Search, Users, Globe, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
-import { Reload } from "../components/Reload/Reload";
+
 import { CountryCard } from "../components/CountryCard";
 import Loader from "../components/reload/Loader";
 import { useDetailedCountries } from "../app/queries/useAllCountries";
+import Reload from "../components/reload/Reload";
 
 export const SearchPage = () => {
   const [showDropdown, setShowDropdown] = useState(false);

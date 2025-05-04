@@ -1,10 +1,20 @@
 import { useState, useEffect, useRef, use } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { Globe, ArrowLeft, Info, X, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  Search,
+  X,
+  Info,
+  Clock,
+  MessageSquare,
+  DollarSign,
+  Map as MapIcon,
+  AlertTriangle,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
-import { Reload } from "../components/Reload/Reload";
+import Reload from "../components/reload/Reload";
 import Loader from "../components/reload/Loader";
 import { useCountriesLatLng } from "../app/queries/useAllCountries";
 
@@ -416,244 +426,284 @@ export const LiveWorld = () => {
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden ">
+    <div className=" min-h-screen w-full overflow-hidden bg-gradient-to-b from-gray-900 to-black">
       <div ref={mountRef} className="absolute inset-0 z-0" />
 
       <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="container mx-auto p-4 h-full flex flex-col">
-          <motion.div
+        <div className="container mx-auto h-full flex flex-col">
+          <motion.header
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="pointer-events-auto"
+            className="pointer-events-auto pt-6 px-6"
           >
-            <div className="flex items-center gap-4 mb-4">
-              <a
-                href="/"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-colors"
-              >
-                <ArrowLeft size={20} />
-              </a>
-              <h1 className="text-2xl font-bold text-white">
-                3D World Explorer
-              </h1>
-            </div>
-
-            <div className="relative max-w-md pt-16">
-              <div className="absolute top-18 flex items-center pointer-events-none">
-                <Search size={26} className="text-white" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <a
+                  href="/"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-300 border border-white/10"
+                  aria-label="Back to home"
+                >
+                  <ArrowLeft size={18} />
+                </a>
+                <h1 className="text-2xl font-medium text-white tracking-tight">
+                  World Explorer
+                </h1>
               </div>
+            </div>
+          </motion.header>
+
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="pointer-events-auto px-6 mt-20 relative max-w-lg mx-auto w-full"
+          >
+            <div className="relative">
               <input
                 type="text"
                 placeholder="Search for a country..."
                 value={search}
                 onChange={handleSearch}
-                className="w-full ml-10 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full py-3 px-5 outline-none focus:ring-2 focus:ring-blue-400 placeholder-primary"
+                className="w-full bg-primary/10 border border-white/10 text-white rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 placeholder-white/40 transition-all duration-300"
               />
+              <Search
+                size={20}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-primary/50"
+              />
+
               {search && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black/60 hover:text-black pt-16"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 dark:dark hover:text-white/80 transition-colors"
+                  aria-label="Clear search"
                 >
                   <X size={18} />
                 </button>
               )}
-
-              {showResults && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg overflow-hidden z-50">
-                  {searchResults.map((country) => (
-                    <button
-                      key={country.cca3}
-                      className="flex items-center gap-3 w-full text-left px-4 py-3 text-white hover:bg-white/20 transition-colors border-b border-white/10 last:border-0"
-                      onClick={() => selectCountry(country)}
-                    >
-                      <img
-                        src={country.flags.png}
-                        alt={
-                          country.flags.alt || `Flag of ${country.name.common}`
-                        }
-                        className="w-8 h-5 object-cover rounded"
-                      />
-                      <span>{country.name.common}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {showResults &&
-                searchResults.length === 0 &&
-                search.length > 1 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg p-4 text-center text-white">
-                    No countries found matching "{search}"
-                  </div>
-                )}
             </div>
-          </motion.div>
 
-          {isLoading && <Loader />}
+            {showResults && (
+              <div className="absolute left-0 right-0 mt-2 z-50 px-4 py-2">
+                {searchResults.length > 0 ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-primary/10 dark:dark/80 backdrop-blur-lg border border-white/10 rounded-md overflow-hidden shadow-2xl"
+                  >
+                    {searchResults.map((country) => (
+                      <button
+                        key={country.cca3}
+                        className="flex items-center gap-3 w-full text-left px-4 py-3 text-white hover:bg-white/10 transition-all border-b border-white/5 last:border-0"
+                        onClick={() => selectCountry(country)}
+                      >
+                        <img
+                          src={country.flags.png}
+                          alt={
+                            country.flags.alt ||
+                            `Flag of ${country.name.common}`
+                          }
+                          className="w-8 h-5 object-cover rounded shadow-sm"
+                        />
+                        <span className="font-medium">
+                          {country.name.common}
+                        </span>
+                      </button>
+                    ))}
+                  </motion.div>
+                ) : search.length > 1 ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gray-800/80 backdrop-blur-lg border border-white/10 rounded-xl p-4 text-center text-white/80 shadow-2xl"
+                  >
+                    No countries found matching "
+                    <span className="text-white">{search}</span>"
+                  </motion.div>
+                ) : null}
+              </div>
+            )}
+          </motion.div>
 
           {!selectedCountry && !isLoading && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center text-white/70 text-sm"
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center pointer-events-none"
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <Info size={16} />
-                <span>Use your mouse to rotate the globe</span>
+              <div className="flex flex-col items-center justify-center gap-2 text-white/70 text-sm w-full">
+                <Info size={14} />
+                <span>Drag to rotate the globe</span>
+                <span>Search for a country to view details</span>
               </div>
-              <div>Search for a country to see detailed information</div>
             </motion.div>
+          )}
+
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl">
+                <Loader />
+              </div>
+            </div>
           )}
 
           {selectedCountry && (
             <motion.div
-              initial={{ opacity: 0, x: 300 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, type: "spring" }}
-              className="pointer-events-auto ml-auto w-full max-w-md bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden"
+              exit={{ opacity: 0, x: 40 }}
+              transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
+              className="pointer-events-auto  w-full max-w-md p-4 "
             >
               {detailsLoading ? (
                 <Loader />
               ) : countryDetails ? (
-                <div className="flex flex-col h-full max-h-[60vh]">
-                  <div className="relative">
+                <div className="bg-gray-900 opacity-80 rounded-lg overflow-hidden border border-gray-800 shadow-lg">
+                  <div className="relative h-28">
                     <img
                       src={countryDetails.flags.png}
                       alt={
                         countryDetails.flags.alt ||
                         `Flag of ${countryDetails.name.common}`
                       }
-                      className="w-full h-40 object-cover"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+
                     <button
                       onClick={closeDetails}
-                      className="absolute top-4 right-4 bg-black/40 hover:bg-black/60 rounded-full p-2 text-white transition-colors"
+                      className="absolute top-3 right-3 bg-black/30 p-1.5 rounded-full text-white"
+                      aria-label="Close details"
                     >
-                      <X size={20} />
+                      <X size={16} />
                     </button>
-                    <div className="absolute bottom-0 left-0 p-4">
-                      <h2 className="text-2xl font-bold text-white">
+
+                    <div className="absolute bottom-2 left-3">
+                      <h2 className="text-xl font-medium text-white">
                         {countryDetails.name.common}
                       </h2>
-                      <p className="text-white/80">
-                        {countryDetails.name.official}
-                      </p>
                     </div>
                   </div>
 
-                  <div className="p-4 text-white overflow-y-auto">
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-white/10 rounded-lg p-3">
-                          <h3 className="text-xs uppercase tracking-wider text-white/60 mb-1">
-                            Capital
-                          </h3>
-                          <p>{countryDetails.capital?.[0] || "N/A"}</p>
-                        </div>
-                        <div className="bg-white/10 rounded-lg p-3">
-                          <h3 className="text-xs uppercase tracking-wider text-white/60 mb-1">
-                            Region
-                          </h3>
-                          <p>{countryDetails.region}</p>
-                        </div>
-                        <div className="bg-white/10 rounded-lg p-3">
-                          <h3 className="text-xs uppercase tracking-wider text-white/60 mb-1">
-                            Population
-                          </h3>
-                          <p>{formatNumber(countryDetails.population)}</p>
-                        </div>
-                        <div className="bg-white/10 rounded-lg p-3">
-                          <h3 className="text-xs uppercase tracking-wider text-white/60 mb-1">
-                            Area
-                          </h3>
-                          <p>
-                            {countryDetails.area
-                              ? `${formatNumber(countryDetails.area)} km²`
-                              : "N/A"}
-                          </p>
-                        </div>
+                  <div className="p-4 text-gray-200 overflow-y-auto max-h-[60vh]">
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-400">Capital</span>
+                        <span>{countryDetails.capital?.[0] || "N/A"}</span>
                       </div>
 
-                      <div className="bg-white/10 rounded-lg p-4">
-                        <h3 className="text-sm font-medium mb-2">Languages</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {countryDetails.languages ? (
-                            Object.values(countryDetails.languages).map(
-                              (language, index) => (
-                                <span
-                                  key={index}
-                                  className="px-2 py-1 bg-white/10 rounded-full text-sm"
-                                >
-                                  {language}
-                                </span>
-                              )
-                            )
-                          ) : (
-                            <span>N/A</span>
-                          )}
-                        </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-400">Region</span>
+                        <span>{countryDetails.region}</span>
                       </div>
 
-                      <div className="bg-white/10 rounded-lg p-4">
-                        <h3 className="text-sm font-medium mb-2">Currencies</h3>
-                        <p>{getCurrencies(countryDetails.currencies)}</p>
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-400">
+                          Population
+                        </span>
+                        <span>{formatNumber(countryDetails.population)}</span>
                       </div>
 
-                      <div className="bg-white/10 rounded-lg p-4">
-                        <h3 className="text-sm font-medium mb-2">Timezones</h3>
-                        <div className="flex flex-wrap gap-2 text-sm">
-                          {countryDetails.timezones ? (
-                            countryDetails.timezones.map((timezone, index) => (
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-400">Area</span>
+                        <span>
+                          {countryDetails.area
+                            ? `${formatNumber(countryDetails.area)} km²`
+                            : "N/A"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <h3 className="text-xs text-gray-400 mb-1.5">
+                        Languages
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {countryDetails.languages ? (
+                          Object.values(countryDetails.languages).map(
+                            (language, index) => (
                               <span
                                 key={index}
-                                className="px-2 py-1 bg-white/10 rounded-full"
+                                className="px-2 py-0.5 bg-gray-800 rounded-md text-xs"
                               >
-                                {timezone}
+                                {language}
                               </span>
-                            ))
-                          ) : (
-                            <span>N/A</span>
-                          )}
-                        </div>
-                      </div>
-
-                      {countryDetails.borders &&
-                        countryDetails.borders.length > 0 && (
-                          <div className="bg-white/10 rounded-lg p-4">
-                            <h3 className="text-sm font-medium mb-2">
-                              Border Countries
-                            </h3>
-                            <div className="flex flex-wrap gap-2">
-                              {countryDetails.borders.map((border) => {
-                                const borderCountry = countries.find(
-                                  (c) => c.cca3 === border
-                                );
-                                return borderCountry ? (
-                                  <button
-                                    key={border}
-                                    className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded-full text-sm flex items-center gap-2 transition-colors"
-                                    onClick={() => selectCountry(borderCountry)}
-                                  >
-                                    <img
-                                      src={borderCountry.flags.png}
-                                      alt={`Flag of ${borderCountry.name.common}`}
-                                      className="w-4 h-3 object-cover"
-                                    />
-                                    <span>{borderCountry.name.common}</span>
-                                  </button>
-                                ) : null;
-                              })}
-                            </div>
-                          </div>
+                            )
+                          )
+                        ) : (
+                          <span className="text-gray-500">N/A</span>
                         )}
+                      </div>
                     </div>
+
+                    <div className="mb-4">
+                      <h3 className="text-xs text-gray-400 mb-1.5">
+                        Currencies
+                      </h3>
+                      <p className="text-sm">
+                        {getCurrencies(countryDetails.currencies)}
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <h3 className="text-xs text-gray-400 mb-1.5">
+                        Timezones
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {countryDetails.timezones ? (
+                          countryDetails.timezones.map((timezone, index) => (
+                            <span
+                              key={index}
+                              className="px-2 py-0.5 bg-gray-800 rounded-md text-xs"
+                            >
+                              {timezone}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-gray-500">N/A</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {countryDetails.borders &&
+                      countryDetails.borders.length > 0 && (
+                        <div>
+                          <h3 className="text-xs text-gray-400 mb-1.5">
+                            Border Countries
+                          </h3>
+                          <div className="flex flex-wrap gap-1.5">
+                            {countryDetails.borders.map((border) => {
+                              const borderCountry = countries.find(
+                                (c) => c.cca3 === border
+                              );
+                              return borderCountry ? (
+                                <button
+                                  key={border}
+                                  className="px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded-md text-xs flex items-center gap-1.5 transition-colors"
+                                  onClick={() => selectCountry(borderCountry)}
+                                >
+                                  <img
+                                    src={borderCountry.flags.png}
+                                    alt={`Flag of ${borderCountry.name.common}`}
+                                    className="w-3 h-2 object-cover rounded-sm"
+                                  />
+                                  <span>{borderCountry.name.common}</span>
+                                </button>
+                              ) : null;
+                            })}
+                          </div>
+                        </div>
+                      )}
                   </div>
                 </div>
               ) : (
-                <div className="p-6 text-center text-white">
+                <div className="bg-gray-800/70 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center text-white">
+                  <AlertTriangle
+                    className="mx-auto mb-3 text-amber-400"
+                    size={24}
+                  />
                   <p>Error loading country details</p>
                 </div>
               )}

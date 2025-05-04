@@ -171,7 +171,7 @@ const Footer = () => {
                 </li>
                 <li className="flex items-center text-sm">
                   <Mail size={18} className="mr-2 flex-shrink-0" />
-                  <span>support@grubgo.com</span>
+                  <span>support@taza.com</span>
                 </li>
               </ul>
             </div>
@@ -182,7 +182,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; 2025 GrubGo. All rights reserved.
+            &copy; 2025 TAZA. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a

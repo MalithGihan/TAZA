@@ -10,9 +10,7 @@ This is a web application that allows users to explore countries. The applicatio
 
 ## 🔗 Live App
 
-Once the project is deployed, paste the live link below:
-
-`"https://your-live-site.vercel.app"`
+[Visit from here](https://taza-mu.vercel.app/)
 
 ---
 
@@ -42,7 +40,7 @@ Once the project is deployed, paste the live link below:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/MalithGihan/TAZA.git
+   git clone https://github.com/IT22352330/Taza.git
 
    ```
 

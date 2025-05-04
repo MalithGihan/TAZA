@@ -37,7 +37,7 @@ export default function PopularDestinations() {
   }
 
   return (
-    <div className="font-serif min-h-screen pt-36 pb-16 justify-center items-center max-w-7xl mx-auto">
+    <div className="font-serif min-h-screen pt-36 pb-16 justify-center items-center max-w-7xl mx-auto md:px-10 px-6">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-primary mb-3 ">
           Popular Travel Destinations
@@ -48,7 +48,7 @@ export default function PopularDestinations() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
         {successfulCountries.map((country, index) => (
           <CountryCard country={country.country} key={index} />
         ))}

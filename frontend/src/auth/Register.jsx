@@ -21,9 +21,9 @@ const Register = () => {
   };
 
   return (
-    <div className="fixed top-40 inset-0 z-50 flex items-start justify-center">
-      <div className="flex flex-col">
-        <form onSubmit={handleSubmit} className=" w-full max-w-sm">
+    <div className="flex justify-center items-center min-h-screen py-10 px-5">
+      <div className="flex flex-col w-full max-w-md">
+        <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
           {error && (
             <p className="text-red-500 p-1 mb-4 text-center bg-red-200 rounded-md">
