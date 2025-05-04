@@ -114,6 +114,5 @@ This project is licensed under the MIT License.
 For any inquiries, feel free to reach out via:
 
 Email: malithgihan099@gmail.com\
-Contributors: @IT22352330\
-Number: 0703387938\
+
 
